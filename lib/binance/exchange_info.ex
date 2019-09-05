@@ -1,6 +1,6 @@
 defmodule Binance.ExchangeInfo do
   @moduledoc """
-  Struct for representing the result returned by /api/v1/exchangeInfo
+  Struct for representing the result returned by /fapi/v1/exchangeInfo
   """
 
   defstruct [

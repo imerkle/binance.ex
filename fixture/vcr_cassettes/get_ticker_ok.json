@@ -6,7 +6,7 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "https://api.binance.com/api/v1/ticker/24hr?symbol=LTCBTC"
+      "url": "https://api.binance.com/fapi/v1/ticker/24hr?symbol=LTCBTC"
     },
     "response": {
       "binary": false,

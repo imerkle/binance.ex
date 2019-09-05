@@ -7,7 +7,7 @@ defmodule Binance do
   Pings binance API. Returns `{:ok, %{}}` if successful, `{:error, reason}` otherwise
   """
   def ping() do
-    HTTPClient.get_binance("/api/v1/ping")
+    HTTPClient.get_binance("/fapi/v1/ping")
   end
 
   @doc """
@@ -22,14 +22,14 @@ defmodule Binance do
 
   """
   def get_server_time() do
-    case HTTPClient.get_binance("/api/v1/time") do
+    case HTTPClient.get_binance("/fapi/v1/time") do
       {:ok, %{"serverTime" => time}} -> {:ok, time}
       err -> err
     end
   end
 
   def get_exchange_info() do
-    case HTTPClient.get_binance("/api/v1/exchangeInfo") do
+    case HTTPClient.get_binance("/fapi/v1/exchangeInfo") do
       {:ok, data} -> {:ok, Binance.ExchangeInfo.new(data)}
       err -> err
     end
@@ -55,7 +55,7 @@ defmodule Binance do
   ```
   """
   def get_all_prices() do
-    case HTTPClient.get_binance("/api/v1/ticker/allPrices") do
+    case HTTPClient.get_binance("/fapi/v1/ticker/allPrices") do
       {:ok, data} ->
         {:ok, Enum.map(data, &Binance.SymbolPrice.new(&1))}
 
@@ -91,7 +91,7 @@ defmodule Binance do
   end
 
   def get_ticker(symbol) when is_binary(symbol) do
-    case HTTPClient.get_binance("/api/v1/ticker/24hr?symbol=#{symbol}") do
+    case HTTPClient.get_binance("/fapi/v1/ticker/24hr?symbol=#{symbol}") do
       {:ok, data} -> {:ok, Binance.Ticker.new(data)}
       err -> err
     end
@@ -126,7 +126,7 @@ defmodule Binance do
   ```
   """
   def get_depth(symbol, limit) do
-    case HTTPClient.get_binance("/api/v1/depth?symbol=#{symbol}&limit=#{limit}") do
+    case HTTPClient.get_binance("/fapi/v1/depth?symbol=#{symbol}&limit=#{limit}") do
       {:ok, data} -> {:ok, Binance.OrderBook.new(data)}
       err -> err
     end
